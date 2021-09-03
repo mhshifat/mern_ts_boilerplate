@@ -1,4 +1,5 @@
 import { Document, model, Schema } from "mongoose";
+import m2s from "mongoose-to-swagger";
 
 export interface UserDocument {
   email: string;
@@ -14,4 +15,8 @@ const DocumentSchema = new Schema(
   { timestamps: true }
 );
 
-export default model<UserDocumentModel>("User", DocumentSchema, "users");
+const User = model<UserDocumentModel>("User", DocumentSchema, "users");
+
+export const UserSwaggerSchema = m2s(User);
+
+export default User;

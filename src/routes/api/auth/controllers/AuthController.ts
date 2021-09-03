@@ -10,7 +10,7 @@ const AuthController = {
     if (user) {
       const auth = await AuthService.findAuth({ user_id: user._id });
       const { accessToken, refreshToken } = AuthService.generateTokens({
-        user,
+        user
       });
       await setCookieInResponse(res, { accessToken, refreshToken });
       auth.set("token", refreshToken);
@@ -33,14 +33,7 @@ const AuthController = {
     res.clearCookie("access_token");
     res.clearCookie("refresh_token");
     return res.status(200).json({ user: null });
-  },
-  register: async (req: Request, res: Response) => {
-    const { email, password } = req.body;
-    await UserService.findNullUser({ email });
-    const user = await UserService.createUser(req.body);
-    await AuthService.createAuth({ password, user_id: user._id });
-    return res.status(200).json({ user });
-  },
+  }
 };
 
 export default AuthController;

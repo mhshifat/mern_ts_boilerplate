@@ -24,7 +24,7 @@ export default function catchAsyncController(
               ? "Please provide a valid ID"
               : errContainsColon?.length === 2
               ? errContainsColon[1]
-              : "Something went wrong, please try again later",
+              : "Something went wrong, please try again later"
         });
     });
   };

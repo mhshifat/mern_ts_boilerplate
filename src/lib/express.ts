@@ -4,7 +4,9 @@ import cors from "cors";
 import express from "express";
 import helmet from "helmet";
 import morgan from "morgan";
+import swaggerUi from "swagger-ui-express";
 import routes from "../routes";
+import { swaggerSpec } from "./swagger";
 
 export default function createServer() {
   const app = express();
@@ -24,6 +26,7 @@ export default function createServer() {
 
   app.get("/", (_, res) => res.send("Hello from Server"));
   app.get("/api", (_, res) => res.send("Hello from API"));
+  app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
   app.use("/api/v1", routes());
 
   return app;

@@ -1,6 +1,7 @@
 /* eslint-disable func-names */
 import bcrypt from "bcryptjs";
 import { Document, model, Schema } from "mongoose";
+import m2s from "mongoose-to-swagger";
 
 export interface AuthDocument {
   user_id: string;
@@ -37,4 +38,8 @@ DocumentSchema.methods.comparePassword = async function (candidatePassword) {
   return isMatched;
 };
 
-export default model<AuthDocumentModel>("Auth", DocumentSchema, "auth");
+const Auth = model<AuthDocumentModel>("Auth", DocumentSchema, "auth");
+
+export const AuthSwaggerSchema = m2s(Auth);
+
+export default Auth;

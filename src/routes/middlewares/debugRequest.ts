@@ -16,7 +16,7 @@ export default function debugRequest(
 ) {
   const preview: DebugRequestObj = {
     method: req?.method,
-    path: req?.path,
+    path: req?.path
   };
 
   switch (req?.method) {
