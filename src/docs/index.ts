@@ -1,10 +1,8 @@
 import swaggerJSDoc from "swagger-jsdoc";
 import { AuthSwaggerSchema } from "../routes/api/auth/model/Auth";
-import {
-  LoginBodySchema,
-  RegisterBodySchema
-} from "../routes/api/auth/validationSchemas";
+import { LoginBodySchema } from "../routes/api/auth/validationSchemas";
 import { UserSwaggerSchema } from "../routes/api/users/model/User";
+import { RegisterBodySchema } from "../routes/api/users/validationSchemas";
 import authRoutes from "./authRoutes";
 import tags from "./tags";
 import userRoutes from "./userRoutes";

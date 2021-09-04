@@ -17,6 +17,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Auth_1 = require("../routes/api/auth/model/Auth");
 var validationSchemas_1 = require("../routes/api/auth/validationSchemas");
 var User_1 = require("../routes/api/users/model/User");
+var validationSchemas_2 = require("../routes/api/users/validationSchemas");
 var authRoutes_1 = __importDefault(require("./authRoutes"));
 var tags_1 = __importDefault(require("./tags"));
 var userRoutes_1 = __importDefault(require("./userRoutes"));
@@ -42,7 +43,7 @@ exports.default = {
                 AuthSwaggerSchema: Auth_1.AuthSwaggerSchema,
                 UserSwaggerSchema: User_1.UserSwaggerSchema,
                 LoginBodySchema: validationSchemas_1.LoginBodySchema,
-                RegisterBodySchema: validationSchemas_1.RegisterBodySchema,
+                RegisterBodySchema: validationSchemas_2.RegisterBodySchema,
                 Error: {
                     type: "object",
                     properties: {

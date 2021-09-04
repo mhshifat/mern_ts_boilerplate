@@ -65,6 +65,6 @@ var UserController = {
                     return [2 /*return*/, res.status(200).json({ user: user })];
             }
         });
-    }); },
+    }); }
 };
 exports.default = UserController;

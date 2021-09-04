@@ -1,7 +1,7 @@
 import Joi from "joi";
 import j2s from "joi-to-swagger";
 
-export const loginBodySchema = {
+export const registerBodySchema = {
   email: Joi.string()
     .email({
       minDomainSegments: 2,
@@ -11,4 +11,6 @@ export const loginBodySchema = {
   password: Joi.string().required()
 };
 
-export const { swagger: LoginBodySchema } = j2s(Joi.object(loginBodySchema));
+export const { swagger: RegisterBodySchema } = j2s(
+  Joi.object(registerBodySchema)
+);

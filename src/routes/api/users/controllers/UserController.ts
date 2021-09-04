@@ -12,7 +12,7 @@ const UserController = {
     const user = await UserService.createUser(req.body);
     await AuthService.createAuth({ password, user_id: user._id });
     return res.status(200).json({ user });
-  },
+  }
 };
 
 export default UserController;
