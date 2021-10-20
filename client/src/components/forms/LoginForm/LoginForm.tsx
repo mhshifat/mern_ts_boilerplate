@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import useAuth from "../../../hooks/useAuth";
 import API from "../../../lib/api";
+import Input from "../../shared/Input/Input";
 
 export interface LoginFormValues {
   email: string;
@@ -20,16 +21,18 @@ export default function LoginForm() {
 
   return (
     <form onSubmit={handleSubmit(handleUserLogin)}>
-      <input
+      <Input
         type="text"
         placeholder="Email address"
-        value="user1@gmail.com"
+        error="email"
+        // value="user1@gmail.com"
         {...register("email")}
       />
-      <input
+      <Input
         type="password"
         placeholder="Password"
-        value="abc123"
+        error="password"
+        // value="abc123"
         {...register("password")}
       />
       <button type="submit">Login</button>

@@ -16,6 +16,10 @@ http.interceptors.response.use(
   (config) => config,
   async (err) => {
     const originalRequest = err.config;
+    const newEvent = new CustomEvent("errors", {
+      detail: []
+    });
+    window.dispatchEvent(newEvent);
     if (err.response?.status === 401 && !originalRequest?.isRetry) {
       originalRequest.isRetry = true;
       try {
@@ -26,8 +30,13 @@ http.interceptors.response.use(
       } catch (error) {
         return {};
       }
-    } else if (err.response?.status === 401) {
+    } else if (err.response?.status === 401 || err.response?.status === 400) {
       return toast.error(err?.response?.data?.error || err?.message);
+    } else if (err.response?.status === 422) {
+      const event = new CustomEvent("errors", {
+        detail: err.response?.data?.errors
+      });
+      return window.dispatchEvent(event);
     } else {
       return Promise.reject(err);
     }

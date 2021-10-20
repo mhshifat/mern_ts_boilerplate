@@ -42,7 +42,8 @@
     "no-unused-vars": 0,
     "react/prop-types": 0,
     "no-confusing-arrow": 0,
-    "react/jsx-curly-newline": 0
+    "react/jsx-curly-newline": 0,
+    "react/require-default-props": 0
   },
   "root": true
 }

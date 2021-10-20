@@ -7,7 +7,9 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setInterval(() => setLoading(false), 5000);
+    const timer = setInterval(() => setLoading(false), 5000);
+
+    return () => clearInterval(timer);
   }, []);
 
   return (
