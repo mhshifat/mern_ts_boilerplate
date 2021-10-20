@@ -25,14 +25,14 @@ export default function LoginForm() {
         type="text"
         placeholder="Email address"
         error="email"
-        // value="user1@gmail.com"
+        value="user1@gmail.com"
         {...register("email")}
       />
       <Input
         type="password"
         placeholder="Password"
         error="password"
-        // value="abc123"
+        value="abc123"
         {...register("password")}
       />
       <button type="submit">Login</button>
