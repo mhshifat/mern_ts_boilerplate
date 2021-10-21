@@ -15,8 +15,8 @@ export default function debugRequest(
   next: NextFunction
 ) {
   const preview: DebugRequestObj = {
-    method: req?.method,
-    path: req?.path
+    path: req?.path,
+    method: req?.method
   };
 
   switch (req?.method) {
@@ -38,7 +38,13 @@ export default function debugRequest(
       break;
   }
 
-  logger.info(JSON.stringify(preview, null, 4));
+  if (
+    !!Object.values(preview?.params || {}).length ||
+    !!Object.values(preview?.query || {}).length ||
+    !!Object.values(preview?.body || {}).length
+  ) {
+    logger.info(JSON.stringify(preview, null, 4));
+  }
 
   return next();
 }

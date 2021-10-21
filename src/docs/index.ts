@@ -1,9 +1,11 @@
 import swaggerJSDoc from "swagger-jsdoc";
 import { AuthSwaggerSchema } from "../routes/api/auth/model/Auth";
 import { LoginBodySchema } from "../routes/api/auth/validationSchemas";
+import { LogSwaggerSchema } from "../routes/api/logs/model/Log";
 import { UserSwaggerSchema } from "../routes/api/users/model/User";
 import { RegisterBodySchema } from "../routes/api/users/validationSchemas";
 import authRoutes from "./authRoutes";
+import logRoutes from "./logRoutes";
 import tags from "./tags";
 import userRoutes from "./userRoutes";
 
@@ -28,6 +30,7 @@ export default {
       schemas: {
         AuthSwaggerSchema,
         UserSwaggerSchema,
+        LogSwaggerSchema,
         LoginBodySchema,
         RegisterBodySchema,
         Error: {
@@ -61,7 +64,8 @@ export default {
     },
     paths: {
       ...authRoutes,
-      ...userRoutes
+      ...userRoutes,
+      ...logRoutes
     }
   },
   apis: []

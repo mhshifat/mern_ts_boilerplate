@@ -11,6 +11,7 @@ function routes() {
     router.use(debugRequest_1.default);
     router.use("/auth", api_1.default.AUTH_API);
     router.use("/users", api_1.default.USERS_API);
+    router.use("/logs", api_1.default.LOGS_API);
     return router;
 }
 exports.default = routes;

@@ -20,6 +20,16 @@ exports.default = {
                             }
                         }
                     }
+                },
+                500: {
+                    description: "Internal Server Error",
+                    content: {
+                        "application/json": {
+                            schema: {
+                                $ref: "#/components/schemas/Error"
+                            }
+                        }
+                    }
                 }
             }
         },
@@ -81,6 +91,16 @@ exports.default = {
                             }
                         }
                     }
+                },
+                500: {
+                    description: "Internal Server Error",
+                    content: {
+                        "application/json": {
+                            schema: {
+                                $ref: "#/components/schemas/Error"
+                            }
+                        }
+                    }
                 }
             }
         },
@@ -106,6 +126,16 @@ exports.default = {
                 },
                 401: {
                     description: "Unauthenticated",
+                    content: {
+                        "application/json": {
+                            schema: {
+                                $ref: "#/components/schemas/Error"
+                            }
+                        }
+                    }
+                },
+                500: {
+                    description: "Internal Server Error",
                     content: {
                         "application/json": {
                             schema: {

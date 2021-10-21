@@ -8,6 +8,7 @@ export default function routes() {
   router.use(debugRequest);
   router.use("/auth", api.AUTH_API);
   router.use("/users", api.USERS_API);
+  router.use("/logs", api.LOGS_API);
 
   return router;
 }

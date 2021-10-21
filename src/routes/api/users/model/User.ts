@@ -11,6 +11,9 @@ export interface UserDocumentModel extends UserDocument, Document {}
 const DocumentSchema = new Schema(
   {
     email: { type: String, required: true, unique: true },
+    username: { type: String, required: true },
+    first_name: { type: String, required: false },
+    last_name: { type: String, required: false }
   },
   { timestamps: true }
 );

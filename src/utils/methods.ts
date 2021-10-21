@@ -6,10 +6,15 @@ export const setCookieInResponse = async (
 ) => {
   res.cookie("access_token", accessToken, {
     httpOnly: true,
-    maxAge: 60 * 60 * 1000,
+    maxAge: 60 * 60 * 1000
   });
   res.cookie("refresh_token", refreshToken, {
     httpOnly: true,
-    maxAge: 1000 * 60 * 60 * 24 * 30,
+    maxAge: 1000 * 60 * 60 * 24 * 30
   });
+};
+
+export const getLogEvent = (url: string): string => {
+  const event = url.split("/")[3];
+  return event.charAt(0).toUpperCase() + event.slice(1);
 };

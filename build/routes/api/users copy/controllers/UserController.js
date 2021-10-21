@@ -39,49 +39,32 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AuthSwaggerSchema = void 0;
-/* eslint-disable func-names */
-var bcryptjs_1 = __importDefault(require("bcryptjs"));
-var mongoose_1 = require("mongoose");
-var mongoose_to_swagger_1 = __importDefault(require("mongoose-to-swagger"));
-var DocumentSchema = new mongoose_1.Schema({
-    user_id: { type: mongoose_1.Schema.Types.ObjectId, required: true, ref: "User" },
-    password: { type: String, default: "" },
-    token: { type: String, default: "" }
-}, { timestamps: true });
-DocumentSchema.pre("save", function (next) {
-    return __awaiter(this, void 0, void 0, function () {
-        var user, _a;
+var AuthService_1 = __importDefault(require("../../auth/services/AuthService"));
+var UserService_1 = __importDefault(require("../services/UserService"));
+var UserController = {
+    getUsers: function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            return [2 /*return*/, res.status(200).json({ message: "All Users" })];
+        });
+    }); },
+    createUser: function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+        var _a, email, password, user;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
-                    user = this;
-                    if (!user.isModified("password"))
-                        return [2 /*return*/, next()];
-                    _a = user;
-                    return [4 /*yield*/, bcryptjs_1.default.hash(user.password, 12)];
+                    _a = req.body, email = _a.email, password = _a.password;
+                    return [4 /*yield*/, UserService_1.default.findNullUser({ email: email })];
                 case 1:
-                    _a.password = _b.sent();
-                    return [2 /*return*/, next()];
+                    _b.sent();
+                    return [4 /*yield*/, UserService_1.default.createUser(req.body)];
+                case 2:
+                    user = _b.sent();
+                    return [4 /*yield*/, AuthService_1.default.createAuth({ password: password, user_id: user._id })];
+                case 3:
+                    _b.sent();
+                    return [2 /*return*/, res.status(200).json({ user: user })];
             }
         });
-    });
-});
-DocumentSchema.methods.comparePassword = function (candidatePassword) {
-    return __awaiter(this, void 0, void 0, function () {
-        var isMatched;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, bcryptjs_1.default.compare(candidatePassword, this.password)];
-                case 1:
-                    isMatched = _a.sent();
-                    if (!isMatched)
-                        throw new Error("400:Invalid credentials!");
-                    return [2 /*return*/, isMatched];
-            }
-        });
-    });
+    }); }
 };
-var Auth = mongoose_1.model("Auth", DocumentSchema, "auth");
-exports.AuthSwaggerSchema = mongoose_to_swagger_1.default(Auth);
-exports.default = Auth;
+exports.default = UserController;

@@ -50,7 +50,7 @@ function isAuth(req, res, next) {
                 if (!access_token)
                     throw new Error();
                 uid = (jsonwebtoken_1.default.verify(access_token, JWT_SECRET) || {
-                    uid: null,
+                    uid: null
                 }).uid;
                 if (!uid)
                     throw new Error();

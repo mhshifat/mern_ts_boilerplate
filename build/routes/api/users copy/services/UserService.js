@@ -39,49 +39,38 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AuthSwaggerSchema = void 0;
-/* eslint-disable func-names */
-var bcryptjs_1 = __importDefault(require("bcryptjs"));
-var mongoose_1 = require("mongoose");
-var mongoose_to_swagger_1 = __importDefault(require("mongoose-to-swagger"));
-var DocumentSchema = new mongoose_1.Schema({
-    user_id: { type: mongoose_1.Schema.Types.ObjectId, required: true, ref: "User" },
-    password: { type: String, default: "" },
-    token: { type: String, default: "" }
-}, { timestamps: true });
-DocumentSchema.pre("save", function (next) {
-    return __awaiter(this, void 0, void 0, function () {
-        var user, _a;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
-                case 0:
-                    user = this;
-                    if (!user.isModified("password"))
-                        return [2 /*return*/, next()];
-                    _a = user;
-                    return [4 /*yield*/, bcryptjs_1.default.hash(user.password, 12)];
-                case 1:
-                    _a.password = _b.sent();
-                    return [2 /*return*/, next()];
-            }
-        });
-    });
-});
-DocumentSchema.methods.comparePassword = function (candidatePassword) {
-    return __awaiter(this, void 0, void 0, function () {
-        var isMatched;
+var User_1 = __importDefault(require("../model/User"));
+var UserService = {
+    findNullUser: function (query) { return __awaiter(void 0, void 0, void 0, function () {
+        var doc;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, bcryptjs_1.default.compare(candidatePassword, this.password)];
+                case 0: return [4 /*yield*/, User_1.default.findOne(query)];
                 case 1:
-                    isMatched = _a.sent();
-                    if (!isMatched)
-                        throw new Error("400:Invalid credentials!");
-                    return [2 /*return*/, isMatched];
+                    doc = _a.sent();
+                    if (doc)
+                        throw new Error("409:User already exists!");
+                    return [2 /*return*/, doc];
             }
         });
-    });
+    }); },
+    findUser: function (query) { return __awaiter(void 0, void 0, void 0, function () {
+        var doc;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, User_1.default.findOne(query)];
+                case 1:
+                    doc = _a.sent();
+                    if (!doc)
+                        throw new Error("404:User not found!");
+                    return [2 /*return*/, doc];
+            }
+        });
+    }); },
+    createUser: function (body) { return __awaiter(void 0, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            return [2 /*return*/, User_1.default.create(body)];
+        });
+    }); },
 };
-var Auth = mongoose_1.model("Auth", DocumentSchema, "auth");
-exports.AuthSwaggerSchema = mongoose_to_swagger_1.default(Auth);
-exports.default = Auth;
+exports.default = UserService;

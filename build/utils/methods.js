@@ -36,21 +36,26 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.setCookieInResponse = void 0;
+exports.getLogEvent = exports.setCookieInResponse = void 0;
 var setCookieInResponse = function (res, _a) {
     var accessToken = _a.accessToken, refreshToken = _a.refreshToken;
     return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_b) {
             res.cookie("access_token", accessToken, {
                 httpOnly: true,
-                maxAge: 60 * 60 * 1000,
+                maxAge: 60 * 60 * 1000
             });
             res.cookie("refresh_token", refreshToken, {
                 httpOnly: true,
-                maxAge: 1000 * 60 * 60 * 24 * 30,
+                maxAge: 1000 * 60 * 60 * 24 * 30
             });
             return [2 /*return*/];
         });
     });
 };
 exports.setCookieInResponse = setCookieInResponse;
+var getLogEvent = function (url) {
+    var event = url.split("/")[3];
+    return event.charAt(0).toUpperCase() + event.slice(1);
+};
+exports.getLogEvent = getLogEvent;

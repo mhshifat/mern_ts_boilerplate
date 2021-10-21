@@ -17,7 +17,7 @@ const DocumentSchema = new Schema(
   {
     user_id: { type: Schema.Types.ObjectId, required: true, ref: "User" },
     password: { type: String, default: "" },
-    token: { type: String, default: "" },
+    token: { type: String, default: "" }
   },
   { timestamps: true }
 );

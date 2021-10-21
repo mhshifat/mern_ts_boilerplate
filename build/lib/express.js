@@ -17,14 +17,14 @@ function createServer() {
     app.use([
         cors_1.default({
             origin: process.env.CLIENT_URI,
-            credentials: true,
+            credentials: true
         }),
         helmet_1.default(),
         morgan_1.default("dev"),
         compression_1.default(),
         cookie_parser_1.default(),
         express_1.default.json(),
-        express_1.default.urlencoded({ extended: false }),
+        express_1.default.urlencoded({ extended: false })
     ]);
     app.get("/", function (_, res) { return res.send("Hello from Server"); });
     app.get("/api", function (_, res) { return res.send("Hello from API"); });

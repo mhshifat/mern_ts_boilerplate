@@ -16,9 +16,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var Auth_1 = require("../routes/api/auth/model/Auth");
 var validationSchemas_1 = require("../routes/api/auth/validationSchemas");
+var Log_1 = require("../routes/api/logs/model/Log");
 var User_1 = require("../routes/api/users/model/User");
 var validationSchemas_2 = require("../routes/api/users/validationSchemas");
 var authRoutes_1 = __importDefault(require("./authRoutes"));
+var logRoutes_1 = __importDefault(require("./logRoutes"));
 var tags_1 = __importDefault(require("./tags"));
 var userRoutes_1 = __importDefault(require("./userRoutes"));
 exports.default = {
@@ -42,6 +44,7 @@ exports.default = {
             schemas: {
                 AuthSwaggerSchema: Auth_1.AuthSwaggerSchema,
                 UserSwaggerSchema: User_1.UserSwaggerSchema,
+                LogSwaggerSchema: Log_1.LogSwaggerSchema,
                 LoginBodySchema: validationSchemas_1.LoginBodySchema,
                 RegisterBodySchema: validationSchemas_2.RegisterBodySchema,
                 Error: {
@@ -73,7 +76,7 @@ exports.default = {
                 }
             }
         },
-        paths: __assign(__assign({}, authRoutes_1.default), userRoutes_1.default)
+        paths: __assign(__assign(__assign({}, authRoutes_1.default), userRoutes_1.default), logRoutes_1.default)
     },
     apis: []
 };

@@ -14,14 +14,14 @@ export default function createServer() {
   app.use([
     cors({
       origin: process.env.CLIENT_URI,
-      credentials: true,
+      credentials: true
     }),
     helmet(),
     morgan("dev"),
     compression(),
     cookieParser(),
     express.json(),
-    express.urlencoded({ extended: false }),
+    express.urlencoded({ extended: false })
   ]);
 
   app.get("/", (_, res) => res.send("Hello from Server"));

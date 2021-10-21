@@ -2,6 +2,40 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {
     "/users": {
+        get: {
+            tags: ["USER"],
+            summary: "Returns all users",
+            responses: {
+                200: {
+                    description: "Success",
+                    content: {
+                        "application/json": {
+                            schema: {
+                                type: "object",
+                                properties: {
+                                    logs: {
+                                        type: "array",
+                                        items: {
+                                            $ref: "#/components/schemas/UserSwaggerSchema"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                500: {
+                    description: "Internal Server Error",
+                    content: {
+                        "application/json": {
+                            schema: {
+                                $ref: "#/components/schemas/Error"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         post: {
             tags: ["USER"],
             summary: "Register or create a new user and returns user details",
@@ -57,6 +91,16 @@ exports.default = {
                         "application/json": {
                             schema: {
                                 $ref: "#/components/schemas/Errors"
+                            }
+                        }
+                    }
+                },
+                500: {
+                    description: "Internal Server Error",
+                    content: {
+                        "application/json": {
+                            schema: {
+                                $ref: "#/components/schemas/Error"
                             }
                         }
                     }

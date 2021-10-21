@@ -8,5 +8,9 @@ export default [
   {
     name: "USER",
     description: "User related API endpoints"
+  },
+  {
+    name: "LOG",
+    description: "Log related API endpoints"
   }
 ] as swaggerJSDoc.Tag[];

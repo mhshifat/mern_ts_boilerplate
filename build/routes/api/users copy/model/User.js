@@ -8,9 +8,6 @@ var mongoose_1 = require("mongoose");
 var mongoose_to_swagger_1 = __importDefault(require("mongoose-to-swagger"));
 var DocumentSchema = new mongoose_1.Schema({
     email: { type: String, required: true, unique: true },
-    username: { type: String, required: true },
-    first_name: { type: String, required: false },
-    last_name: { type: String, required: false }
 }, { timestamps: true });
 var User = mongoose_1.model("User", DocumentSchema, "users");
 exports.UserSwaggerSchema = mongoose_to_swagger_1.default(User);
