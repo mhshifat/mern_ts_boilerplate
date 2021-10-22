@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -35,8 +46,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getLogEvent = exports.setCookieInResponse = void 0;
+exports.successResponse = exports.getLogEvent = exports.setCookieInResponse = void 0;
+var Log_1 = require("../routes/api/logs/model/Log");
+var LogService_1 = __importDefault(require("../routes/api/logs/services/LogService"));
 var setCookieInResponse = function (res, _a) {
     var accessToken = _a.accessToken, refreshToken = _a.refreshToken;
     return __awaiter(void 0, void 0, void 0, function () {
@@ -59,3 +75,26 @@ var getLogEvent = function (url) {
     return event.charAt(0).toUpperCase() + event.slice(1);
 };
 exports.getLogEvent = getLogEvent;
+var successResponse = function (req, res, options) { return __awaiter(void 0, void 0, void 0, function () {
+    var logData;
+    var _a;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                logData = {
+                    ip: req.ip,
+                    event: exports.getLogEvent(req.originalUrl),
+                    event_type: req.method,
+                    browser: req.headers["user-agent"] || "",
+                    outcome: Log_1.LogOutcomeEnum.SUCCESS,
+                    type: Log_1.LogTypeEnum.AUDIT,
+                    user: ((_a = req) === null || _a === void 0 ? void 0 : _a.user) || (options === null || options === void 0 ? void 0 : options.user) || null
+                };
+                return [4 /*yield*/, LogService_1.default.createLog(logData)];
+            case 1:
+                _b.sent();
+                return [2 /*return*/, res.status(options.status).json(__assign({ success: true }, options.result))];
+        }
+    });
+}); };
+exports.successResponse = successResponse;

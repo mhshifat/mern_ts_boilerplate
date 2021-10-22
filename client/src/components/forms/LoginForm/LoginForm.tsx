@@ -32,7 +32,7 @@ export default function LoginForm() {
         type="password"
         placeholder="Password"
         error="password"
-        // value="abc123"
+        value="abc123"
         {...register("password")}
       />
       <button type="submit">Login</button>

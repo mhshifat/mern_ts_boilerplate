@@ -39,12 +39,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var methods_1 = require("../../../../utils/methods");
 var AuthService_1 = __importDefault(require("../../auth/services/AuthService"));
 var UserService_1 = __importDefault(require("../services/UserService"));
 var UserController = {
     getUsers: function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            return [2 /*return*/, res.status(200).json({ message: "All Users" })];
+            return [2 /*return*/, methods_1.successResponse(req, res, {
+                    status: 200,
+                    result: { message: "All Users" }
+                })];
         });
     }); },
     createUser: function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
@@ -62,7 +66,10 @@ var UserController = {
                     return [4 /*yield*/, AuthService_1.default.createAuth({ password: password, user_id: user._id })];
                 case 3:
                     _b.sent();
-                    return [2 /*return*/, res.status(200).json({ user: user })];
+                    return [2 /*return*/, methods_1.successResponse(req, res, {
+                            status: 200,
+                            result: { user: user }
+                        })];
             }
         });
     }); }

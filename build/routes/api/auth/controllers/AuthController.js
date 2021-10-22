@@ -67,7 +67,11 @@ var AuthController = {
                 case 4:
                     _b.sent();
                     _b.label = 5;
-                case 5: return [2 /*return*/, res.status(200).json({ user: user })];
+                case 5: return [2 /*return*/, methods_1.successResponse(req, res, {
+                        status: 200,
+                        user: user === null || user === void 0 ? void 0 : user._id,
+                        result: { user: user }
+                    })];
             }
         });
     }); },
@@ -94,15 +98,25 @@ var AuthController = {
                     return [4 /*yield*/, auth.save()];
                 case 5:
                     _c.sent();
-                    return [2 /*return*/, res.status(200).json({ user: user })];
+                    return [2 /*return*/, methods_1.successResponse(req, res, {
+                            status: 200,
+                            user: user === null || user === void 0 ? void 0 : user._id,
+                            result: { user: user }
+                        })];
             }
         });
     }); },
     logout: function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+        var userId;
         return __generator(this, function (_a) {
+            userId = req.user;
             res.clearCookie("access_token");
             res.clearCookie("refresh_token");
-            return [2 /*return*/, res.status(200).json({ user: null })];
+            return [2 /*return*/, methods_1.successResponse(req, res, {
+                    status: 200,
+                    user: userId,
+                    result: { user: null }
+                })];
         });
     }); }
 };

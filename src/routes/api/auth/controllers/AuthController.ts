@@ -1,5 +1,8 @@
 import { Request, Response } from "express";
-import { setCookieInResponse } from "../../../../utils/methods";
+import {
+  setCookieInResponse,
+  successResponse
+} from "../../../../utils/methods";
 import UserService from "../../users/services/UserService";
 import AuthService from "../services/AuthService";
 
@@ -16,7 +19,11 @@ const AuthController = {
       auth.set("token", refreshToken);
       await auth.save();
     }
-    return res.status(200).json({ user });
+    return successResponse(req, res, {
+      status: 200,
+      user: user?._id,
+      result: { user }
+    });
   },
   login: async (req: Request, res: Response) => {
     const { email, password } = req.body;
@@ -27,12 +34,21 @@ const AuthController = {
     await setCookieInResponse(res, { accessToken, refreshToken });
     auth.set("token", refreshToken);
     await auth.save();
-    return res.status(200).json({ user });
+    return successResponse(req, res, {
+      status: 200,
+      user: user?._id,
+      result: { user }
+    });
   },
   logout: async (req: Request, res: Response) => {
+    const userId = (req as any).user;
     res.clearCookie("access_token");
     res.clearCookie("refresh_token");
-    return res.status(200).json({ user: null });
+    return successResponse(req, res, {
+      status: 200,
+      user: userId,
+      result: { user: null }
+    });
   }
 };
 
