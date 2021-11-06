@@ -1,5 +1,4 @@
-import loaderSVG from "../../../assets/loader.svg";
-import "./Loader.scss";
+import loaderSVG from "../../assets/loader.svg";
 
 interface LoaderProps {
   size: "sm" | "md" | "lg";

@@ -1,7 +1,6 @@
 import axios from "axios";
 import { ImgHTMLAttributes, useEffect, useState } from "react";
-import Skeleton from "../Skeleton/Skeleton";
-import "./Img.scss";
+import Skeleton from "./Skeleton";
 
 export default function Img({
   src,

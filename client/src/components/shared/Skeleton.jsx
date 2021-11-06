@@ -1,5 +1,4 @@
 import { useCallback, useMemo } from "react";
-import "./Skeleton.scss";
 
 export default function Skeleton({ loading, children }) {
   const addSkeletonType = useCallback((type) => {

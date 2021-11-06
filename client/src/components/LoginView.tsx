@@ -1,4 +1,4 @@
-import LoginForm from "../forms/LoginForm/LoginForm";
+import LoginForm from "./forms/LoginForm";
 
 export default function LoginView() {
   return (

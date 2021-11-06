@@ -1,9 +1,10 @@
 import { Route, Switch } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import Loader from "../components/shared/Loader/Loader";
+import Loader from "../components/shared/Loader";
 import useLoaderWithRefresh from "../hooks/useLoaderWithRefresh";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
+import NotFound from "../pages/NotFound";
 import PublicRoute from "./PublicRoute";
 
 export default function Routes() {
@@ -16,6 +17,7 @@ export default function Routes() {
       <Switch>
         <Route exact path="/" component={Home} />
         <PublicRoute exact path="/login" component={Login} />
+        <Route component={NotFound} />
       </Switch>
     </>
   );

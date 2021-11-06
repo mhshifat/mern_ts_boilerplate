@@ -32,7 +32,7 @@ function Input(
   }, []);
 
   return (
-    <div>
+    <div className="input">
       <input {...restProps} ref={ref} />
       {error && <p className="input__error">{error}</p>}
     </div>

@@ -1,4 +1,4 @@
-import { LoginFormValues } from "../components/forms/LoginForm/LoginForm";
+import { LoginFormValues } from "../components/forms/LoginForm";
 import http from "./axios";
 
 const API = {

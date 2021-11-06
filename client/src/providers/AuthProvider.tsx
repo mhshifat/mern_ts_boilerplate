@@ -1,5 +1,5 @@
 import React, { createContext, useCallback, useState } from "react";
-import http from "../../lib/axios";
+import http from "../lib/axios";
 
 export interface UserDocument {
   email: string;
