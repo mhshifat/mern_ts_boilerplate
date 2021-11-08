@@ -1,5 +1,5 @@
 import { LoginFormValues } from "../components/forms/LoginForm";
-import http from "./axios";
+import http from "../lib/axios";
 
 const API = {
   // Auth...
