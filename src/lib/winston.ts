@@ -5,6 +5,8 @@ const enumerateErrorFormat = winston.format((info) => {
   if (info instanceof Error) {
     Object.assign(info, { message: info.stack });
   }
+  // eslint-disable-next-line no-param-reassign
+  info.level = info.level.toUpperCase();
   return info;
 });
 
@@ -16,7 +18,7 @@ const logger = winston.createLogger({
       ? winston.format.colorize()
       : winston.format.uncolorize(),
     winston.format.splat(),
-    winston.format.printf(({ level, message }) => `${level}: ${message}`)
+    winston.format.printf(({ level, message }) => `[ ${level} ] : ${message}`)
   ),
   transports: [
     new winston.transports.Console({
@@ -24,5 +26,12 @@ const logger = winston.createLogger({
     })
   ]
 });
+
+logger.stream = {
+  // @ts-ignore
+  write(message: any, encoding: any) {
+    logger.http(message);
+  }
+};
 
 export default logger;

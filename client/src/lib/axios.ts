@@ -28,15 +28,17 @@ http.interceptors.response.use(
         });
         return http.request(originalRequest);
       } catch (error) {
-        return {};
+        return Promise.reject(error);
       }
     } else if (err.response?.status === 401 || err.response?.status === 400) {
-      return toast.error(err?.response?.data?.error || err?.message);
+      toast.error(err?.response?.data?.error || err?.message);
+      return Promise.reject(err);
     } else if (err.response?.status === 422) {
       const event = new CustomEvent("errors", {
         detail: err.response?.data?.errors
       });
-      return window.dispatchEvent(event);
+      window.dispatchEvent(event);
+      return Promise.reject(err);
     } else {
       return Promise.reject(err);
     }

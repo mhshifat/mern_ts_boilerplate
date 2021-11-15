@@ -7,6 +7,7 @@ import morgan from "morgan";
 import swaggerUi from "swagger-ui-express";
 import routes from "../routes";
 import { swaggerSpec } from "./swagger";
+import logger from "./winston";
 
 export default function createServer() {
   const app = express();
@@ -17,7 +18,10 @@ export default function createServer() {
       credentials: true
     }),
     helmet(),
-    morgan("dev"),
+    // @ts-ignore
+    morgan("dev", {
+      stream: logger.stream
+    }),
     compression(),
     cookieParser(),
     express.json(),
