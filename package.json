@@ -7,7 +7,7 @@
     "start": "./build",
     "build": "tsc -p .",
     "dev:client": "cd client && yarn start",
-    "dev:server": "nodemon --exec ts-node --transpile-only ./src/index.ts",
+    "dev:server": "nodemon --legacy-watch --exec ts-node --transpile-only ./src/index.ts",
     "serve": "concurrently --kill-others-on-fail \"yarn dev:server\" \"yarn dev:client\""
   },
   "keywords": [],

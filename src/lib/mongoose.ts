@@ -6,5 +6,7 @@ export default async function createDbConnection(str: string) {
     useCreateIndex: true,
     useFindAndModify: false,
     useUnifiedTopology: true
+  }).catch((err) => {
+    setTimeout(createDbConnection, 1000);
   });
 }

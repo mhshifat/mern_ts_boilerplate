@@ -1,0 +1,47 @@
+version: '3'
+services:
+  client:
+    tty: true
+    stdin_open: true
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    depends_on:
+      - server
+    restart: always
+    environment:
+      - CHIKIDAR_USEPOLLING=true
+    networks:
+      - mern-app
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "5000:5000"
+    env_file:
+      - .env
+    depends_on:
+      - mongo
+    restart: always
+    networks:
+      - mern-app
+    links:
+      - mongo
+  mongo:
+    image: mongo:3
+    ports:
+      - "27017:27017"
+    restart: always
+    networks:
+      - mern-app
+    volumes:
+      - mongo-data:/data/db
+networks:
+  mern-app:
+    driver: bridge
+volumes:
+  mongo-data:
+    driver: local
